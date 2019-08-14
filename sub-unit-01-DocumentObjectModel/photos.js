@@ -42,6 +42,29 @@ function zoomFig() {
    
 }
 
+// creates the event listener
+function createEventListeners(){
+   
+   // console.log(`leftArrow clicked`);
+
+   var leftArrow = document.getElementById("leftarrow");
+   if (leftarrow.addEventListener) {
+      leftarrow.addEventListener("click", leftArrow, false);
+   } else if (leftarrow,attachEvent) {
+      leftArrow.attachEvent("onclick", lefArrow)
+   }
+
+   var rightArrow = document.getElementById("rightarrow");
+   if (rightarrow.addEventListener) {
+      rightarrow.addEventListener("click", rightArrow, false);
+   } else if (rightarrow.attachEvent) {
+      rightArrow.attachEvent("onclick", rightArrow)
+   }
+}
+
+
+
+
 /* create event listeners and populate image elements */
 function setUpPage() {
    createEventListeners();
