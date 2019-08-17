@@ -15,6 +15,8 @@ var photoOrder = [1,2,3,4,5];
 
 var figureCount = 3;
 
+var autoAdvance = setInterval(rightAdvance, 5000);
+
 function populateFigures() {
    var filename;
    var currentFig;
@@ -34,8 +36,15 @@ function populateFigures() {
    }
 }
 
-/* shift all images one figure to the left, and change values in photoOrder array to match  */
 function rightArrow() {
+   var autoAdvance = setInterval(rightAdvance, 5000);
+   clearInterval(autoAdvance);
+   rightAdvance();
+}
+
+/* shift all images one figure to the left, and change values in photoOrder array to match  */
+function rightAdvance() {
+   
    for (var i = 0; i < 5; i++) {
       if ((photoOrder[i] + 1) === 6) {
          photoOrder[i] = 1;
@@ -48,6 +57,7 @@ function rightArrow() {
 
 /* shift all images one figure to the right, and change values in photoOrder array to match  */
 function leftArrow() {
+   clearInterval(autoAdvance);
    for (var i = 0; i < 5; i++) {
       if ((photoOrder[i] - 1) === 0) {
          photoOrder[i] = 5;
@@ -123,7 +133,17 @@ function previewThree() {
 
 /* open center figure in separate window */
 function zoomFig() {
+   var propertyWidth = 960;
+   var propertyHeight = 600;
+   var winLeft = ((screen.width - propertyWidth / 2));
+   var winTop = ((screen.height - propertyHeight / 2));
+   var winOptions = "width=960,height=600,";
+   winOptions  += ",left=" + winLeft;
+   winOptions += ",top=" + winTop;
    
+
+   var zoomWindow = window.open("zoom.html", "zoomwin", winOption);
+   zoomWindow.focus();
 }
 
 // creates the event listener
@@ -141,7 +161,7 @@ function createEventListeners(){
    //right arrow
    var rightarrow = document.getElementById("rightarrow");
    if (rightarrow.addEventListener) {
-      rightarrow.addEventListener("click", rightArrow, false);
+      rightarrow.addEventListener("click", rightAdvance, false);
    } else if (rightarrow.attachEvent) {
       rightarrow.attachEvent("onclick", rightArrow);
    }
@@ -166,9 +186,6 @@ function createEventListeners(){
    } else if (mainFig.attachEvent) {
       mainFig.attachEvent("onclick", zoomFig);
    }
-
-
-
 
 
 /* create event listeners and populate image elements */
